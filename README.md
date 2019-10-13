@@ -33,20 +33,32 @@ i. Export proxy pada setiap UML dengan sintaks seperti di bawah ini:
 
 j. setelah itu lakukan perintah apt-get update.
 
-## 1. membuat sebuah website utama dengan (1) alamat http://kanto.yy.com
+## 1. membuat sebuah website utama dengan alamat http://kanto.yy.com yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
 langkah-langkah :
-#### a) Buka ARTICUNO dan update package lists dengan menjalankan command: apt-get update
-#### b) Setelah melakukan update silahkan install aplikasi bind9 pada ARTICUNO dengan perintah: apt-get install bind9 -y
-#### c) Lakukan perintah pada ARTICUNO. Isikan seperti berikut: nano /etc/bind/named.conf.local
-#### d) Isikan konfigurasi domain kanto.a7.com sesuai gambar berikut :
+a) Buka ARTICUNO dan update package lists dengan menjalankan command: apt-get update
+
+b) Setelah melakukan update silahkan install aplikasi bind9 pada ARTICUNO dengan perintah: apt-get install bind9 -y
+
+c) Lakukan perintah pada ARTICUNO. Isikan seperti berikut: nano /etc/bind/named.conf.local
+
+d) Isikan konfigurasi domain kanto.a7.com sesuai gambar berikut :
 ```
 zone "kanto.a7.com"{
 	type master;
 	file "/etc/bind/jarkom/jarkomtc.com";
 	};
  ```
-#### e) Buat folder dengan perintah mkdir /etc/bind/jarkom
-#### f) copykan file db.local pada path /etc/bind ke dalam folder kanto.a7.com yang baru saja dibuat dan diubah namanya menjadi jarkom
-#### g) lakukan nano /etc/bind/jarkom/kanto.a7.com dan edit seperti di gambar.
+e) Buat folder dengan perintah mkdir /etc/bind/jarkom
+
+f) copykan file db.local pada path /etc/bind ke dalam folder kanto.a7.com yang baru saja dibuat dan diubah namanya menjadi jarkom
+
+g) lakukan nano /etc/bind/jarkom/kanto.a7.com dan edit seperti di gambar.
 ![10](https://user-images.githubusercontent.com/45744801/66715382-e31e7680-edec-11e9-8445-c2961e72e313.PNG)
-#### h) service bind9 restart
+
+h) service bind9 restart
+
+## 2. memiliki alias http://www.kanto.yy.com, yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
+langkah-langkah :
+
+a. tinggal menambahkan 
+## 3. dan subdomain http://www.pallet.kanto.yy.com yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
