@@ -12,7 +12,7 @@ c. login ke semua uml.
 d. Hilangkan tanda pagar (#) bagian net.ipv4.ip_forward=1 dengan perintah nano /etc/sysctl.conf pada router pikachu.
 ![2](https://user-images.githubusercontent.com/45744801/66715122-b4eb6780-ede9-11e9-82d9-28ffc1d3149b.PNG)
 
-e. jalankan perintah sysctl -p
+e. jalankan perintah sysctl -p.
 
 f. setting IP dari setiap UML dengan dengan perintah nano /etc/network/interfaces.
 ![3](https://user-images.githubusercontent.com/45744801/66715181-583c7c80-edea-11e9-8cfe-ed71809194be.PNG)
@@ -26,12 +26,27 @@ g. ketikkan perintah service networking restart di setiap uml setelah setting ip
 
 h. ketikkan perintah atau membuat file script yang berisi iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16.
 i. Export proxy pada setiap UML dengan sintaks seperti di bawah ini:
-export http_proxy=”http://ITS-564415-ab673:798d2@proxy.its.ac.id:8080”
-export https_proxy=”http://ITS-564415-ab673:798d2@proxy.its.ac.id:8080”
-export ftp_proxy=”http://ITS-564415-ab673:798d2@proxy.its.ac.id:8080”
+
+#### export http_proxy=”http://ITS-564415-ab673:798d2@proxy.its.ac.id:8080”
+#### export https_proxy=”http://ITS-564415-ab673:798d2@proxy.its.ac.id:8080”
+#### export ftp_proxy=”http://ITS-564415-ab673:798d2@proxy.its.ac.id:8080”
 
 j. setelah itu lakukan perintah apt-get update.
 
 ## 1. membuat sebuah website utama dengan (1) alamat http://kanto.yy.com
 langkah-langkah :
-###
+#### a) Buka ARTICUNO dan update package lists dengan menjalankan command: apt-get update
+#### b) Setelah melakukan update silahkan install aplikasi bind9 pada ARTICUNO dengan perintah: apt-get install bind9 -y
+#### c) Lakukan perintah pada ARTICUNO. Isikan seperti berikut: nano /etc/bind/named.conf.local
+#### d) Isikan konfigurasi domain kanto.a7.com sesuai gambar berikut :
+```
+zone "kanto.a7.com"{
+	type master;
+	file "/etc/bind/jarkom/jarkomtc.com";
+	};
+ ```
+#### e) Buat folder dengan perintah mkdir /etc/bind/jarkom
+#### f) copykan file db.local pada path /etc/bind ke dalam folder kanto.a7.com yang baru saja dibuat dan diubah namanya menjadi jarkom
+#### g) lakukan nano /etc/bind/jarkom/kanto.a7.com dan edit seperti di gambar.
+![10](https://user-images.githubusercontent.com/45744801/66715382-e31e7680-edec-11e9-8445-c2961e72e313.PNG)
+#### h) service bind9 restart
