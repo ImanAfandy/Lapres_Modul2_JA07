@@ -95,3 +95,46 @@ d) Edit file 73.151.10.in-addr.arpa menjadi gambar di bawah ini
 ![13](https://user-images.githubusercontent.com/45744801/66715595-5e812780-edef-11e9-830a-6b219e7aa5e4.PNG)
 
 e) service bind9 restart
+
+#### 5. Untuk mengantisipasi server rusak, mereka meminta dibuatkan DNS Server Slave pada MOLTRES agar layanan tidak terganggu.
+langkah-langkah :
+
+##### I. Konfigurasi Pada Server ARTICUNO
+a) Edit file /etc/bind/named.conf.local dan sesuaikan dengan syntax berikut
+```zone "kanto.a7.com" {
+    type master;
+    notify yes;
+    also-notify { 10.151.73.68; }; IP MOLTRES
+    allow-transfer { 10.151.73.68; }; IP MOLTRES
+    file "/etc/bind/jarkom/kanto.a7.com";
+};
+```
+![14](https://user-images.githubusercontent.com/45744801/66715674-39d97f80-edf0-11e9-9de4-61c7b1962523.PNG)
+
+b) lalu service bind9 restart
+
+##### II. Konfigurasi Pada Server MOLTRES
+langkah-langkah :
+
+a) Buka MOLTRES dan update package lists dengan menjalankan command: apt-get update
+
+b) Setelah melakukan update silahkan install aplikasi bind9 pada MOLTRES dengan perintah: apt-get install bind9 -y
+
+c) Kemudian buka file /etc/bind/named.conf.local pada MEWTWO dan tambahkan syntax berikut:
+```
+zone "kanto.a7.com" {
+    type slave;
+    masters { 10.151.73.66; }; // Masukan IP ARTICUNO tanpa tanda petik
+    file "/var/lib/bind/kanto.a7.com";
+};
+```
+d) lalu service bind9 restart
+
+##### III. Testing
+langkah-langkah :
+
+a) Pada server ARTICUNO silahkan matikan bind9 dengan cara service bind9 stop
+
+b) Pada client PSYDUCK dan snorlax pastikan pengaturan nameserver mengarah ke IP ARTICUNO dan IP MOLTRES
+![15](https://user-images.githubusercontent.com/45744801/66715812-f97b0100-edf1-11e9-9fe0-d2a3d9252a18.PNG)
+![16](https://user-images.githubusercontent.com/45744801/66715813-fa139780-edf1-11e9-839a-20dfcdfa2299.PNG)
