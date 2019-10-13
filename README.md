@@ -25,6 +25,7 @@ f. setting IP dari setiap UML dengan dengan perintah nano /etc/network/interface
 g. ketikkan perintah service networking restart di setiap uml setelah setting ip.
 
 h. ketikkan perintah atau membuat file script yang berisi iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16.
+
 i. Export proxy pada setiap UML dengan sintaks seperti di bawah ini:
 
 #### export http_proxy=”http://ITS-564415-ab673:798d2@proxy.its.ac.id:8080”
@@ -60,5 +61,16 @@ h) service bind9 restart
 ## 2. memiliki alias http://www.kanto.yy.com, yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
 langkah-langkah :
 
-a. tinggal menambahkan 
+a. tingal menambahkan 
+```www	IN CNAME kanto.a7.com
+```
+![11](https://user-images.githubusercontent.com/45744801/66715479-00a01000-edee-11e9-9a88-35fd1f3f2f0d.PNG)
+
 ## 3. dan subdomain http://www.pallet.kanto.yy.com yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
+langkah-langkah :
+
+a). tinggal menambahkan
+```www.pallet IN A 10.151.73.67
+```
+![12](https://user-images.githubusercontent.com/45744801/66715480-00a01000-edee-11e9-8e00-c38692669c75.PNG)
+
