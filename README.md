@@ -138,3 +138,43 @@ a) Pada server ARTICUNO silahkan matikan bind9 dengan cara service bind9 stop
 b) Pada client PSYDUCK dan snorlax pastikan pengaturan nameserver mengarah ke IP ARTICUNO dan IP MOLTRES
 ![15](https://user-images.githubusercontent.com/45744801/66715812-f97b0100-edf1-11e9-9fe0-d2a3d9252a18.PNG)
 ![16](https://user-images.githubusercontent.com/45744801/66715813-fa139780-edf1-11e9-839a-20dfcdfa2299.PNG)
+
+#### 6. selain website utama mereka juga meminta dibuatkan subdomain dengan alamat http://pewter.kanto.yy.com yang didelegasikan pada server MOLTRES dan mengarah ke IP Server MEWTWO.
+langkah-langkah :
+### I. Konfigurasi Pada Server ARTICUNO
+
+a) lakukan nano /etc/bind/jarkom/kanto.a7.com
+
+b) Tambahkan konfigurasi seperti pada gambar ke dalam file kanto.a7.com
+![17](https://user-images.githubusercontent.com/45744801/66715902-e6b4fc00-edf2-11e9-8678-cfa8070f2f67.PNG)
+
+c) Kemudian edit file /etc/bind/named.conf.options pada ARTICUNO dengan nano /etc/bind/named.conf.options
+
+d) Kemudian comment dnssec-validation auto; dan tambahkan baris berikut pada /etc/bind/named.conf.options
+```
+allow-query{any;};
+```
+![18](https://user-images.githubusercontent.com/45744801/66715947-5fb45380-edf3-11e9-8ebf-dc45c61061b5.PNG)
+
+e) service bind9 restart
+
+### II. Konfigurasi Pada Server MOLTRES
+langkah-langkah :
+
+a) Pada MOLTRES edit file /etc/bind/named.conf.options dengan nano /etc/bind/named.conf.options
+
+b) Kemudian comment dnssec-validation auto; dan tambahkan baris berikut pada /etc/bind/named.conf.options
+allow-query{any;};
+![19](https://user-images.githubusercontent.com/45744801/66716016-f719a680-edf3-11e9-8956-643ca12f919c.PNG)
+
+c) Lalu edit file /etc/bind/named.conf.local menjadi seperti gambar di bawah:
+![20](https://user-images.githubusercontent.com/45744801/66716033-17496580-edf4-11e9-8b9e-dadd79aa8172.PNG)
+
+d) Kemudian buat direktori dengan delegasi dengan mkdir /etc/bind/delegasi
+
+e) Copy db.local ke direktori pucang dan edit namanya menjadi pewter.kanto.a7.com
+
+f) Kemudian edit file pewter.kanto.a7.com menjadi seperti dibawah ini :
+![21](https://user-images.githubusercontent.com/45744801/66716099-760edf00-edf4-11e9-8afd-57af0e1fed91.PNG)
+
+g) service bind9 restart
