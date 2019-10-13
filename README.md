@@ -215,12 +215,12 @@ a) Menjalankan perintah a2enmod rewrite untuk mengaktifkan module rewrite.
 
 b) Restart apache dengan perintah service apache2 restart
 
-c) Pindah ke directory /var/www/jarkomtc.com dan buat file .htaccess dengan isi file 
+c) Pindah ke directory /var/www/kanto.a7.com dan buat file .htaccess dengan isi file 
 ![23](https://user-images.githubusercontent.com/45744801/66716365-3e556680-edf7-11e9-9b12-a7ba36192bd5.PNG)
 
 d) Pindah ke directory /etc/apache2/sites-available kemudian buka file kanto.a7.com dan tambahkan
 ```
-<Directory /var/www/jarkomtc.com>
+<Directory /var/www/kanto.a7.com>
      Options +FollowSymLinks -Multiviews
      AllowOverride All
  </Directory>
@@ -250,3 +250,23 @@ d) Aktifkan konfigurasi (a2ensite pallet.kanto.a7.com)
 e) Download file pendukung dengan wget 10.151.36.234/pallet.kanto.com.zip di directory /var/www/pallet.kanto.a7.com
 
 f) Extract file .zip
+
+#### 11 Pada folder /public diperbolehkan directory listing tetapi folder didalamnya tidak diperbolehkan
+langkah-langkah :
+
+a) tambahkan file /etc/apache2/sites-available/pallet.kanto.a7.com  sesuai dengan gambar :
+![24](https://user-images.githubusercontent.com/45744801/66716477-4a8df380-edf8-11e9-8fe8-0f8caee10652.PNG)
+
+#### 12 Disediakan file 404.html untuk mengganti error default 404 dari apache
+
+a) Pindah ke directory /var/www/pallet.kanto.a7.com dan buat file .htaccess dengan isi file  
+![25](https://user-images.githubusercontent.com/45744801/66716579-85dcf200-edf9-11e9-8be4-5b51a62465d7.PNG)
+
+b) Pindah ke directory /etc/apache2/sites-available kemudian buka file pallet.kanto.a7.com dan tambahkan
+```
+<Directory /var/www/pallet.kanto.a7.com>
+     Options +FollowSymLinks -Multiviews
+     AllowOverride All
+ </Directory>
+ ```
+ c) service apache2 restart
