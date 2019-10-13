@@ -34,8 +34,9 @@ i. Export proxy pada setiap UML dengan sintaks seperti di bawah ini:
 
 j. setelah itu lakukan perintah apt-get update.
 
-## 1. membuat sebuah website utama dengan alamat http://kanto.yy.com yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
+#### 1. membuat sebuah website utama dengan alamat http://kanto.yy.com yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
 langkah-langkah :
+
 a) Buka ARTICUNO dan update package lists dengan menjalankan command: apt-get update
 
 b) Setelah melakukan update silahkan install aplikasi bind9 pada ARTICUNO dengan perintah: apt-get install bind9 -y
@@ -58,7 +59,7 @@ g) lakukan nano /etc/bind/jarkom/kanto.a7.com dan edit seperti di gambar.
 
 h) service bind9 restart
 
-## 2. memiliki alias http://www.kanto.yy.com, yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
+#### 2. memiliki alias http://www.kanto.yy.com, yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
 langkah-langkah :
 
 a. tingal menambahkan 
@@ -66,7 +67,8 @@ a. tingal menambahkan
 ```
 ![11](https://user-images.githubusercontent.com/45744801/66715479-00a01000-edee-11e9-9a88-35fd1f3f2f0d.PNG)
 
-## 3. dan subdomain http://www.pallet.kanto.yy.com yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
+b) lalu service bind9 restart
+#### 3. dan subdomain http://www.pallet.kanto.yy.com yang diatur DNS-nya pada ARTICUNO dan mengarah ke IP Server MEWTWO
 langkah-langkah :
 
 a). tinggal menambahkan
@@ -74,3 +76,22 @@ a). tinggal menambahkan
 ```
 ![12](https://user-images.githubusercontent.com/45744801/66715480-00a01000-edee-11e9-8e00-c38692669c75.PNG)
 
+b) lalu service bind9 restart
+
+#### 4. membuat reverse domain.
+langkah-langkah :
+
+a) buka nano /etc/bind/named.conf.local
+
+b) Lalu tambahkan konfigurasi berikut ke dalam file named.conf.local
+```zone "73.151.10.in-addr.arpa" {
+    type master;
+    file "/etc/bind/jarkom/73.151.10.in-addr.arpa";
+};
+```
+c) lakukan cp /etc/bind/db.local /etc/bind/jarkom/73.151.10.in-addr.arpa
+
+d) Edit file 73.151.10.in-addr.arpa menjadi gambar di bawah ini
+![13](https://user-images.githubusercontent.com/45744801/66715595-5e812780-edef-11e9-830a-6b219e7aa5e4.PNG)
+
+e) service bind9 restart
