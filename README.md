@@ -230,9 +230,23 @@ d) Pindah ke directory /etc/apache2/sites-available kemudian buka file kanto.a7.
 #### (10) Web http://pallet.kanto.yy.com akan digunakan untuk menyimpan aset file yang memiliki DocumentRoot pada /var/www/pallet.kanto.yy.com dan memiliki struktur folder sebagai berikut:
 ```
 /var/www/pallet.kanto.yy.com
-/public/javascripts
-/public/css
-/public/images
-/errors
+	/public/javascripts
+	/public/css
+	/public/images
+	/errors
 ```
+langkah-langkah :
 
+a) Buat directory website (mkdir /var/www/pallet.kanto.a7.com)
+
+b) Pindah ke direktori /etc/apache2/sites-available dan copy file default ke file pallet.kanto.a7.com
+
+c) Edit file pallet.kanto.a7.com
+
+![24](https://user-images.githubusercontent.com/45744801/66716477-4a8df380-edf8-11e9-8fe8-0f8caee10652.PNG)
+
+d) Aktifkan konfigurasi (a2ensite pallet.kanto.a7.com)
+
+e) Download file pendukung dengan wget 10.151.36.234/pallet.kanto.com.zip di directory /var/www/pallet.kanto.a7.com
+
+f) Extract file .zip
