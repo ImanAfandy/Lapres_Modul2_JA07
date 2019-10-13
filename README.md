@@ -270,3 +270,46 @@ b) Pindah ke directory /etc/apache2/sites-available kemudian buka file pallet.ka
  </Directory>
  ```
  c) service apache2 restart
+
+#### 13. Untuk mengakses file assets javascript awalnya harus menggunakan url http://pallet.kanto.a1.com/public/javascripts. Karena terlalu panjang maka dibuatkan konfigurasi virtual host agar ketika mengakses file assets menjadi http://pallet.kanto.a1.com/js
+
+a) Menjalankan perintah a2enmod rewrite untuk mengaktifkan module rewrite.
+
+b) Restart apache dengan perintah service apache2 restart
+
+c) edit file konfigurasi yang berada di folder /etc/apache2/sites-available
+
+d) buka file pallet.kanto.a7.com
+
+e) tambahkan konfirgurasi seperti pada gambar
+![26](https://user-images.githubusercontent.com/45744801/66716660-77dba100-edfa-11e9-855e-ee1a79c57b67.PNG)
+
+f) Restart apache dengan perintah service apache2 restart
+
+#### 14. sedangkan web http://vermilion.pewter.kanto.a1.com sudah bisa diakses hanya dengan menggunakan port 8888 karena web masih dalam tahap perkembangan dan belum selesai. DocumentRoot web berada pada /var/www/vermilion.
+
+a) Buat directory vermilion dengan mkdir /var/www/vermilion
+
+b) cp /etc/apache2/sites-available/default /etc/apache2/sites-available vermilion.pewter.kanto.a7.com
+
+c) edit konfirgurasi menjadi pada gambar
+![27](https://user-images.githubusercontent.com/45744801/66716703-05b78c00-edfb-11e9-9905-808f4df87fa3.PNG)
+
+d) buka filenya nano /etc/apache2/sites-available vermilion.pewter.kanto.a7.com
+
+e) edit <VirtualHost *:80> menjadi <VirtualHost *:8888>
+
+f) buka file ports.conf berada pada directory /etc/apache2
+
+g) tambahkan listen 8888
+h) aktifkan konfirgurasi menggunakan perintah a2ensite
+i) Restart apache dengan perintah service apache2 restart
+
+#### 15 Untuk mengakses halaman web http://vermilion.pewter.kanto.a1.com, peneliti harus menggunakan VPN (Virtual Private Network) yang memiliki IP 10.151.252.0/22 (Informatics Wifi, Netmask 255.255.252.0 agar web tidak mudah diserang team rocket).
+
+a) Pindah ke directory /etc/apache2/sites-available kemudian buka file vermilion.pewter.kanto.a7.com
+
+b) Edit konfirgurasi menjadi pada gambar
+
+![28](https://user-images.githubusercontent.com/45744801/66716722-57f8ad00-edfb-11e9-8ea3-7097ee994c35.PNG)
+c) Restart apache dengan perintah service apache2 restart
