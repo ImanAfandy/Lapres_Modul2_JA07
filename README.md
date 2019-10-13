@@ -178,3 +178,61 @@ f) Kemudian edit file pewter.kanto.a7.com menjadi seperti dibawah ini :
 ![21](https://user-images.githubusercontent.com/45744801/66716099-760edf00-edf4-11e9-8afd-57af0e1fed91.PNG)
 
 g) service bind9 restart
+
+#### 7. Karena laboratorium memiliki cabang di Vermilion City maka dibuatkan pula domain dengan nama http://vermilion.pewter.kanto.yy.com, domain ini diarahkan ke server MEWTWO.
+langkah-langkah :
+
+a) buka /etc/bind/delegasi/pewter.kanto.a7.com dan edit seperti digambar
+![22](https://user-images.githubusercontent.com/45744801/66716220-7d82b800-edf5-11e9-9464-90f90da47fda.PNG)
+
+#### 8. Setelah selesai membuat keseluruhan domain, kamu diminta untuk segera mengatur web server. Domain http://kanto.yy.com memiliki DocumentRoot pada /var/www/kanto.yy.com.
+
+a)  Install apache di Mewtwo (apt-get install apache2)
+
+b)  Install php di Mewtwo (apt-get install php5)
+
+c)  Pindah ke directory /etc/apache2/sites-available
+
+d)  Copy file default menjadi file kanto.a7.com
+
+e)  buka file dan Tambahkan
+```
+ ServerName kanto.a7.com
+ ServerAlias www.kanto.a7.com
+```
+f) Aktifkan konfigurasi kanto.a7.com Gunakan perintah a2ensite kanto.a7.com
+
+g) service apache2 restart
+
+h) Pindah ke directory /var/www. lalu unzip file hasil download dari wget 10.151.36.234/kanto.com.zip dan ubah nama menjadi kanto.a7.com
+
+i) ganti dns menjadi alamat ARTICUNO yaitu 10.151.73.66
+
+#### 9. Awalnya web dapat diakses menggunakan alamat http://kanto.yy.com/index.php/home. Karenadirasa alamat urlnya kurang bagus, maka  diaktifkan mod rewrite agar urlnya menjadi http://kanto.yy.com/home.
+Langkah-langkah :
+
+a) Menjalankan perintah a2enmod rewrite untuk mengaktifkan module rewrite.
+
+b) Restart apache dengan perintah service apache2 restart
+
+c) Pindah ke directory /var/www/jarkomtc.com dan buat file .htaccess dengan isi file 
+![23](https://user-images.githubusercontent.com/45744801/66716365-3e556680-edf7-11e9-9b12-a7ba36192bd5.PNG)
+
+d) Pindah ke directory /etc/apache2/sites-available kemudian buka file kanto.a7.com dan tambahkan
+```
+<Directory /var/www/jarkomtc.com>
+     Options +FollowSymLinks -Multiviews
+     AllowOverride All
+ </Directory>
+ ```
+ e) service apache2 restart
+ 
+#### (10) Web http://pallet.kanto.yy.com akan digunakan untuk menyimpan aset file yang memiliki DocumentRoot pada /var/www/pallet.kanto.yy.com dan memiliki struktur folder sebagai berikut:
+```
+/var/www/pallet.kanto.yy.com
+/public/javascripts
+/public/css
+/public/images
+/errors
+```
+
