@@ -305,7 +305,7 @@ g) tambahkan listen 8888
 h) aktifkan konfirgurasi menggunakan perintah a2ensite
 i) Restart apache dengan perintah service apache2 restart
 
-#### 15 Untuk mengakses halaman web http://vermilion.pewter.kanto.a1.com, peneliti harus menggunakan VPN (Virtual Private Network) yang memiliki IP 10.151.252.0/22 (Informatics Wifi, Netmask 255.255.252.0 agar web tidak mudah diserang team rocket).
+#### 15. Untuk mengakses halaman web http://vermilion.pewter.kanto.a1.com, peneliti harus menggunakan VPN (Virtual Private Network) yang memiliki IP 10.151.252.0/22 (Informatics Wifi, Netmask 255.255.252.0 agar web tidak mudah diserang team rocket).
 
 a) Pindah ke directory /etc/apache2/sites-available kemudian buka file vermilion.pewter.kanto.a7.com
 
@@ -313,3 +313,31 @@ b) Edit konfirgurasi menjadi pada gambar
 
 ![28](https://user-images.githubusercontent.com/45744801/66716722-57f8ad00-edfb-11e9-8ea3-7097ee994c35.PNG)
 c) Restart apache dengan perintah service apache2 restart
+
+#### 16. Pada Server MOLTRES ditambahkan konfigurasi agar bisa terhubung ke jaringan luar. 
+
+a) Edit file /etc/bind/named.conf.options pada server MOLTRES
+
+b) Ubah konfirgurasi seperti pada gambar
+![29](https://user-images.githubusercontent.com/45744801/66716753-b32a9f80-edfb-11e9-9e26-3796d7102885.PNG)
+c) Restart bind9 dengan perintah service bind9 restart
+
+#### 17. Saat trainer mengunjungi IP MEWTWO, yang muncul bukan web utama http://kanto.a7.com melainkan laman default Apache yang bertuliskan “It works!”. Karena dirasa kurang profesional, maka setiap trainer yang mengunjungi IP MEWTWO akan dialihkan secara otomatis ke http://kanto.a7.com.
+
+a) Menjalankan perintah a2enmod rewrite untuk mengaktifkan module rewrite.
+
+b) Restart apache dengan perintah service apache2 restart
+    
+C) edit file konfigurasi yang berada di folder var/www/kanto.a7.com
+
+d) buat dan edit file .htaccess
+
+e) Ubah konfirgurasi seperti pada gambar
+![30](https://user-images.githubusercontent.com/45744801/66716820-76ab7380-edfc-11e9-9b50-c56ebfe575a8.PNG)
+
+f) Lalu ke directory /etc/apache2/sites-enabled kemudian buka file 0000-default
+
+g) Ubah konfirgurasi seperti pada gambar
+![31](https://user-images.githubusercontent.com/45744801/66716859-dd309180-edfc-11e9-934b-44d43690d022.PNG)
+
+h) Restart apache dengan perintah service apache2 restart
